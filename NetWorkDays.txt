@@ -1,0 +1,14 @@
+(dateFrom as date, dateTo as date) =>
+let
+    sign = if dateFrom > dateTo then -1 else 1,
+    dateMax = if dateFrom > dateTo then dateFrom else dateTo,
+    dateMin = if dateFrom < dateTo then dateFrom else dateTo,
+    WeekDayStart = Date.DayOfWeek(dateMin, Day.Monday) + 1,
+    WeekDayEnd = Date.DayOfWeek(dateMax, Day.Monday) + 1,
+    workDaysBetween = ((Duration.Days(dateMax - dateMin) - WeekDayEnd + WeekDayStart) / 7 * 5),
+    WeekDayStart2 = if WeekDayStart > 6 then 6 else WeekDayStart,
+    WeekDayEnd2 = if WeekDayEnd > 5 then 5 else WeekDayEnd,
+    NetWorkDays = (workDaysBetween - WeekDayStart2 + WeekDayEnd2 + 1) * sign
+in
+    NetWorkDays
+	
